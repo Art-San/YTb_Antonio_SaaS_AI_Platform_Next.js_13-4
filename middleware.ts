@@ -1,3 +1,6 @@
+// https://clerk.com/docs/nextjs/get-started-with-nextjs
+// https://clerk.com/docs/nextjs/get-started-with-nextjs#:~:text=component%20as%20well.-,Protect%20your%20Application,-Now%20that%20Clerk
+
 import { authMiddleware } from '@clerk/nextjs'
 
 // Этот пример защищает все маршруты, включая маршруты api/trpc
