@@ -12,6 +12,9 @@ const LandingPage = () => {
         <Link href={'/sign-up'}>
           <Button>Registr</Button>
         </Link>
+        <Link href={'/dashboard'}>
+          <Button variant={'destructive'}>Dashboard</Button>
+        </Link>
       </div>
     </div>
   )
