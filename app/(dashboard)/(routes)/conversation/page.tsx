@@ -11,15 +11,20 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Empty } from '@/components/Empty'
 import { Loader } from '@/components/Loader'
+import { UserAvatar } from '@/components/UserAvatar'
+import { BotAvatar } from '@/components/BotAvatar'
 
 import { formSchema } from './constans'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { ChatCompletionRequestMessage } from 'openai'
+import { cn } from '@/lib/utils'
 
 const ConversationPage = () => {
   const router = useRouter()
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([])
+
+  console.log('message', messages)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -116,7 +121,18 @@ const ConversationPage = () => {
           )}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message, index) => (
-              <div key={index}>{message.content}</div>
+              <div
+                key={index}
+                className={cn(
+                  'p-8 w-full flex items-start gap-x-8 rounded-lg',
+                  message.role === 'user'
+                    ? 'bg-white border border-black/10'
+                    : 'bg-muted'
+                )}
+              >
+                {message.role === 'user' ? <UserAvatar /> : <BotAvatar />}
+                <p className="text-sm  text-gray-800">{message.content}</p>
+              </div>
             ))}
           </div>
         </div>
