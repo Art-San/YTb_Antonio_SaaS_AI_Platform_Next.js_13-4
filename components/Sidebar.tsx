@@ -71,7 +71,14 @@ const Sidebar = () => {
       <div className="px-3 py-2 flex-1">
         <Link href={'/dashboard'} className=" flex items-center pl-3 mb-14">
           <div className="relative w-8 h-8 mr-4">
-            <Image fill alt="logo" src={'/logo.png'} />
+            <Image
+              fill
+              alt="logo"
+              src={'/logo.png'}
+              sizes="(max-width: 480px) 50%, (max-width: 1024px) 30%, 20%" // использование процентных значений относительно ширины родительского контейнера
+            />
+            {/* <Image fill alt="logo" src={'/logo.png'} sizes="(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 25vw"/> // предполагает использование разных размеров в зависимости от разрешения экрана */}
+            {/* <Image fill alt="logo" src={'/logo.png'} sizes="(max-width: 480px) 200px, (max-width: 1024px) 300px, 400px"/> // использование фиксированных размеров для разных разрешений */}
           </div>
           <h1 className={cn('text-2xl font-bold', montserat.className)}>
             Genius
