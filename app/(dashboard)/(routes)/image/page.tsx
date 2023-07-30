@@ -1,11 +1,12 @@
 'use client'
 import axios from 'axios'
 import * as z from 'zod'
-import { ImageIcon, MessageSquare } from 'lucide-react'
+import { Download, ImageIcon, MessageSquare } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 import { Heading } from '@/components/Heading'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
@@ -23,6 +24,7 @@ import {
 import { cn } from '@/lib/utils'
 
 import { amountOptions, formSchema, resolutionOptions } from './constans'
+import { Card, CardFooter } from '@/components/ui/card'
 
 const ImagePage = () => {
   const router = useRouter()
@@ -33,7 +35,7 @@ const ImagePage = () => {
     defaultValues: {
       prompt: '',
       amount: '1',
-      resolution: '512x312'
+      resolution: '512x512'
     }
   })
 
@@ -42,6 +44,7 @@ const ImagePage = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setImages([])
+
       const response = await axios.post('/api/image', values)
 
       const urls = response.data.map((image: { url: string }) => image.url)
@@ -89,8 +92,8 @@ const ImagePage = () => {
                     <FormControl className="p-0 m-0">
                       <Input
                         type="text"
-                        placeholder="A picture of a horse in Swiss alps 2:34:46"
-                        className=" border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
+                        placeholder="A picture of a horse in Swiss alps"
+                        className=" border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent white-space: pre-wrap"
                         disabled={isLoading}
                         {...field} // растянули поле
                       />
@@ -98,6 +101,7 @@ const ImagePage = () => {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="amount"
@@ -115,8 +119,8 @@ const ImagePage = () => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {amountOptions.map((option, index) => (
-                          <SelectItem key={index} value={option.value}>
+                        {amountOptions.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
                             {option.label}
                           </SelectItem>
                         ))}
@@ -142,8 +146,8 @@ const ImagePage = () => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {resolutionOptions.map((option, index) => (
-                          <SelectItem key={index} value={option.value}>
+                        {resolutionOptions.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
                             {option.label}
                           </SelectItem>
                         ))}
@@ -170,7 +174,26 @@ const ImagePage = () => {
           {images.length === 0 && !isLoading && (
             <Empty label="No image generated" />
           )}
-          <div>images will be rendered here</div>
+          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8">
+            {images.map((src) => (
+              <Card key={src} className=" rounded-lg overflow-hidden">
+                <div className="relative aspect-square">
+                  <Image alt="image" fill src={src} />
+                </div>
+                <CardFooter className="p-2">
+                  <Button
+                    disabled={isLoading}
+                    onClick={() => window.open(src)}
+                    variant="secondary"
+                    className="w-full"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Download
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </div>
