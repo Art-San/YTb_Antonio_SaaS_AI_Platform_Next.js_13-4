@@ -1,1 +1,1 @@
-// 3.12.48
+export const MAX_FREE_COUNTS = 5
