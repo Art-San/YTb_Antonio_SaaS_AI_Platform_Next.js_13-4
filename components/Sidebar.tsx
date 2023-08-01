@@ -4,6 +4,7 @@ import { Montserrat } from 'next/font/google'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import FreeCounter from './FreeCounter'
 import {
   Code,
   ImageIcon,
@@ -63,8 +64,11 @@ const routes = [
     color: 'text-white'
   }
 ]
+interface ISidebarProps {
+  apiLimitCount: number
+}
 
-const Sidebar = () => {
+const Sidebar = ({ apiLimitCount = 0 }: ISidebarProps) => {
   const pathname = usePathname()
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
@@ -105,6 +109,7 @@ const Sidebar = () => {
           ))}
         </div>
       </div>
+      <FreeCounter apiLimitCount={apiLimitCount} />
     </div>
   )
 }
