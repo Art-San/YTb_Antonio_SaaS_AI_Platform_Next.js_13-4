@@ -2,17 +2,13 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
+import { ModalProvider } from '@/components/ModalProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Cenius',
   description: 'AI Platform'
-  // icons: {
-  // icon: './public/favicon-32x32.png',
-  // icon: 'https://drive.google.com/file/d/1xpnmkRQC3fdhj175emiTqzQcejc4fs-a/view?usp=sharing',
-  // apple: './public/apple-touch-icon.png'
-  // }
 }
 
 export default function RootLayout({
@@ -23,7 +19,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <ModalProvider />
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   )
