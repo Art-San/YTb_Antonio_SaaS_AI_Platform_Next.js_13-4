@@ -20,8 +20,10 @@ import { BotAvatar } from '@/components/BotAvatar'
 
 import { formSchema } from './constans'
 import { cn } from '@/lib/utils'
+import { useProModal } from '@/hooks/use-pro-modal'
 
 const CodePage = () => {
+  const proModal = useProModal()
   const router = useRouter()
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([])
 
@@ -50,8 +52,9 @@ const CodePage = () => {
 
       form.reset()
     } catch (error: any) {
-      // TODO: OPEN PRO modal
-      console.log(error)
+      if (error?.response?.status === 403) {
+        proModal.onOpen()
+      }
     } finally {
       router.refresh()
     }

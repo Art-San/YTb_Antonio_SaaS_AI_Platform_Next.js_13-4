@@ -4,12 +4,24 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog'
 import { useProModal } from '@/hooks/use-pro-modal'
 import { Badge } from './ui/badge'
-import { Code, ImageIcon, MessageSquare, Music, VideoIcon } from 'lucide-react'
+import {
+  Check,
+  Code,
+  ImageIcon,
+  MessageSquare,
+  Music,
+  VideoIcon,
+  Zap
+} from 'lucide-react'
+import { Card } from './ui/card'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 
 const tools = [
   {
@@ -59,9 +71,28 @@ const ProModal = () => {
             </div>
           </DialogTitle>
           <DialogDescription className=" text-center pt-2 space-y-2 text-zinc-900 font-medium">
-            {'3:52:35'}
+            {tools.map((tool) => (
+              <Card
+                className="p-3 border-black/6 flex items-center justify-between"
+                key={tool.label}
+              >
+                <div className="flex items-center gap-x-4">
+                  <div className={cn('p-2 w-fit rounded-md', tool.bgColor)}>
+                    <tool.icon className={cn('w-5 h-6', tool.color)} />
+                  </div>
+                  <div className=" font-semibold text-sm">{tool.label}</div>
+                </div>
+                <Check className=" text-primary w-5 h-5" />
+              </Card>
+            ))}
           </DialogDescription>
         </DialogHeader>
+        <DialogFooter>
+          <Button variant="premium" size="lg" className="w-full">
+            Upgrade
+            <Zap className="w-4 h-4 fill-white" />
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   )
