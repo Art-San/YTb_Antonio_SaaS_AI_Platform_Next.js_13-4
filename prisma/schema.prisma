@@ -27,3 +27,8 @@ model UserSubscription {
 // npx prisma db push // первоначально за ПУШИЛИ схему
 // npx prisma generate // Пере генерируем если что то измен
 // npx prisma studio  // смотрим модели
+
+// npx prisma migrate reset // сброс базы данных
+// после сброса
+// 1. npx prisma generate
+// 2. npx prisma db push
