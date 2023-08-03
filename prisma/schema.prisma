@@ -29,6 +29,10 @@ model UserSubscription {
 // npx prisma studio  // смотрим модели
 
 // npx prisma migrate reset // сброс базы данных
-// после сброса
+// после сброса в видео в такой последю Но не сработало
 // 1. npx prisma generate
 // 2. npx prisma db push
+
+// в такой последовательности сработало
+// npx prisma migrate reset
+// npx prisma db push 
