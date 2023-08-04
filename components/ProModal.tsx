@@ -23,6 +23,7 @@ import { Card } from './ui/card'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 
 const tools = [
   {
@@ -68,7 +69,7 @@ const ProModal = () => {
 
       window.location.href = response.data.url
     } catch (error) {
-      console.log(error, 'STRIPE_ERROR_CLIENT')
+      toast.error('Something went wrong-Что-то пошло не так в ProModal ')
     } finally {
       setLoading(false)
     }
@@ -105,6 +106,7 @@ const ProModal = () => {
         </DialogHeader>
         <DialogFooter>
           <Button
+            disabled={loading}
             onClick={onSubscribe}
             variant="premium"
             size="lg"
