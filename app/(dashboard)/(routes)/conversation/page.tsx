@@ -45,6 +45,7 @@ const ConversationPage = () => {
       }
 
       const newMessages = [...messages, userMessage]
+      console.log('newMessages')
       const response = await axios.post('/api/conversation', {
         messages: newMessages
       })
