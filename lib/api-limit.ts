@@ -37,7 +37,8 @@ export const checkApiLimit = async () => {
   const userApilimit = await prismadb.userApiLimit.findUnique({
     where: {
       userId: userId
-    }
+    },
+    include: { ChatMessages: true } // добав от гпт
   })
 
   if (!userApilimit || userApilimit.count < MAX_FREE_COUNTS) {

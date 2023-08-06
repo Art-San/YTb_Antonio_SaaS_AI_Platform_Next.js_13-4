@@ -21,6 +21,7 @@ import { ChatCompletionRequestMessage } from 'openai'
 import { cn } from '@/lib/utils'
 import { useProModal } from '@/hooks/use-pro-modal'
 import toast from 'react-hot-toast'
+import { saveChatMessages } from '@/lib/chat-messages'
 
 const ConversationPage = () => {
   const proModal = useProModal()
@@ -45,7 +46,10 @@ const ConversationPage = () => {
       }
 
       const newMessages = [...messages, userMessage]
-      console.log('newMessages')
+
+      // Сохранение сообщений в базе данных
+      // await saveChatMessages(newMessages)
+
       const response = await axios.post('/api/conversation', {
         messages: newMessages
       })
