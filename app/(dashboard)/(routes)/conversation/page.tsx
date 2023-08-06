@@ -38,7 +38,6 @@ const ConversationPage = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      // throw new Error()  // спровоцировали ошибку в блоке catch
       const userMessage: ChatCompletionRequestMessage = {
         role: 'user',
         content: values.prompt
@@ -103,7 +102,7 @@ const ConversationPage = () => {
                         placeholder="Как расчитать радиус окружности?"
                         className=" border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
-                        {...field} // растянули поле
+                        {...field}
                       />
                     </FormControl>
                   </FormItem>

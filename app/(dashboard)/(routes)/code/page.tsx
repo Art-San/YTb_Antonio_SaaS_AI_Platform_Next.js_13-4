@@ -100,7 +100,7 @@ const CodePage = () => {
                         placeholder="Простая кнопка переключения с помощью React hooks"
                         className=" border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
-                        {...field} // растянули поле
+                        {...field}
                       />
                     </FormControl>
                   </FormItem>

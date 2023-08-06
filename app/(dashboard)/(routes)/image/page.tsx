@@ -101,7 +101,7 @@ const ImagePage = () => {
                         placeholder="A picture of a horse in Swiss alps"
                         className=" border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent white-space: pre-wrap"
                         disabled={isLoading}
-                        {...field} // растянули поле
+                        {...field}
                       />
                     </FormControl>
                   </FormItem>

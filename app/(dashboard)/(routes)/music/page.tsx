@@ -87,7 +87,7 @@ const MusicPage = () => {
                         placeholder="Piano solo"
                         className=" border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
-                        {...field} // растянули поле
+                        {...field}
                       />
                     </FormControl>
                   </FormItem>
